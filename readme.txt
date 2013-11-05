@@ -14,7 +14,7 @@ This plugin was built to give my users an easier way of watching and installing 
 To Come:
 One click install from store.
 
-![Image](../master/screenshot.png?raw=true)
+![Image](https://raw.github.com/bearded-avenger/edd-catalogs/master/screenshot.png)
 
 == ALPHA ==
 This is alpha! There\'s currently a PHP notice that\'s eluding me. 
