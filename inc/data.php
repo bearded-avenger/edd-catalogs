@@ -5,7 +5,7 @@ if(!function_exists('ba_edd_catalog_data')){
 
 	    $apiurl = sprintf('%s/edd-api/products/?key=%s&token=%s&number=-1',$site,$key,$token);
 
-	    $transientKey = 'baEddCatalog-23rrxdf643';
+	    $transientKey = 'baEddCatalog-2399rrxdf643';
 
 	    $cached = get_transient($transientKey);
 
@@ -31,7 +31,7 @@ if(!function_exists('ba_edd_catalog_data')){
 			//action
 		    do_action('edd_catalog_inside_top');
 
-			    for($i=0; $i<=$total; $i++) {
+			    for($i=0; $i<$total; $i++) {
 
 				    $getname 	= isset($data['products'][$i]['info']['title']) ? $data['products'][$i]['info']['title'] : false;
 				    $getprice 	= isset($data['products'][$i]['pricing']['amount']) ? $data['products'][$i]['pricing']['amount'] : false;
