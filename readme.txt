@@ -14,7 +14,7 @@ This plugin was built to give my users an easier way of watching and installing 
 To Come:
 One click install from store.
 
-![edd-catalogs](https://dl.dropboxusercontent.com/u/5594632/edd-catalog-ss.png)
+![edd-catalogs](https://dl.dropboxusercontent.com/u/5594632/edd-catalog-ss.png?raw=true)
 
 == ALPHA ==
 This is alpha! There\'s currently a PHP notice that\'s eluding me. 
