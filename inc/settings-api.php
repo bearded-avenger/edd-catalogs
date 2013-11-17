@@ -59,13 +59,13 @@ class WeDevs_Settings_API_Test {
 		?><div class="ba-edd-catalog-head row">
 
 			<div class="col-md-4 ba-edd-catalog-welcome">
-				<img class="ba-edd-catalog-logo" src="http://placekitten.com/150/150">
+				<img class="ba-edd-catalog-logo" src="<?php echo plugins_url('../img/logo.png', __FILE__) ?>">
 				<h2 class="ba-edd-catalog-title">Product Catalog</h2>
 			</div>
 
 			<div class="col-md-8 ba-edd-catalog-news-feed">
 				<h2 class="ba-edd-news-title">Latest news</h2>
-				<a class="ba-edd-news-all" href="http://nickhaskins.co/news">All News</a>
+				<a class="ba-edd-news-all" href="http://nickhaskins.co/news" target="_blank">More News &rsaquo;</a>
 				<?php echo ba_edd_catalog_news_feed();?>
 			</div>
 
