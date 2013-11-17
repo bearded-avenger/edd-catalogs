@@ -86,7 +86,6 @@ class WeDevs_Settings_API_Test {
 
 	function plugin_admin_init() {
 	    wp_register_style( 'edd-catalog-style', $this->url.'/../css/style.css', self::version, true );
-	    wp_register_script('edd-catalog-bootstrap', $this->url.'/../js/bootstrap.min.js', self::version, true);
 	}
 
 	function submenu_page() {
