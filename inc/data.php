@@ -5,7 +5,7 @@ if(!function_exists('ba_edd_catalog_data')){
 
 	    $apiurl = sprintf('%s/edd-api/products/?key=%s&token=%s&number=-1',$site,$key,$token);
 
-	    $transientKey = 'baEddCatalogAlpha-5fd8882';
+	    $transientKey = 'baEddCatalogAlpha-5992';
 
 	    $cached = get_transient($transientKey);
 
@@ -31,6 +31,8 @@ if(!function_exists('ba_edd_catalog_data')){
 	    // start output
 	    $output = sprintf('<div class="edd-catalog-wrapper">');
 
+	    $output .= sprintf('<div class="row">');
+
 			//action
 		    do_action('edd_catalog_inside_top');
 
@@ -39,6 +41,7 @@ if(!function_exists('ba_edd_catalog_data')){
 			    	$exclude 	= $getexcluded == $data['products'][$i]['info']['slug'];
 
 				   	if ( !in_array($exclude, $data) ):
+
 					    $getname 	= isset($data['products'][$i]['info']['title']) ? $data['products'][$i]['info']['title'] : false;
 					    $getprice 	= isset($data['products'][$i]['pricing']['amount']) ? $data['products'][$i]['pricing']['amount'] : false;
 					    $getimg 	= isset($data['products'][$i]['info']['thumbnail']) ? $data['products'][$i]['info']['thumbnail'] : false;
@@ -50,12 +53,19 @@ if(!function_exists('ba_edd_catalog_data')){
 
 				   	 	$plugin 	= sprintf('%s/%s.php',$slug,$slug);
 					    $link 		= is_plugin_active($plugin) ? sprintf('<a class="edd-catalog-notify installed">installed</a>') : sprintf('<a class="edd-catalog-notify" href="%s">Buy Now %s</a>',$getlink,$getprice);
-					    $output 	.= sprintf('<div class="edd-catalog-item">%s<div class="edd-catalog-item-inner">%s%s</div></div>',$title,$image,$link);
+					    $output 	.= sprintf('<div class="col-md-2"><div class="edd-catalog-item">%s<div class="edd-catalog-item-inner">%s%s</div></div></div>',$title,$image,$link);
+
+					    if ( ( 0 == $i % 6 ) && ( $i < $total )) {
+
+							$output .= sprintf('</div><div class="row">');
+						}
 
 				    endif;
 				}
 
 			do_action('edd_catalog_inside_bottom');
+
+		$output .= sprintf('</div>');
 
 		$output .= sprintf('</div>');
 

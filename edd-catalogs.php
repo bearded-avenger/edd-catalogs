@@ -11,4 +11,4 @@ Description: Displays all products from any site with Easy Digital Downloads ins
 require_once('inc/class.settings-api.php');
 require_once('inc/data.php');
 require_once('inc/news-feed.php');
-require_once('inc/settings-api.php');
+require_once('inc/load.php');
