@@ -118,6 +118,14 @@ class WeDevs_Settings_API_Test {
                     'desc' => __( 'Found in your user profile within the shop Wordpress admin.', 'edd-catalogs' ),
                     'type' => 'password',
                     'default' => ''
+                ),
+                array(
+                    'name' => 'exclude',
+                    'label' => __( 'Excluded Products', 'edd-catalogs' ),
+                    'desc' => __( 'Enter the product slug.', 'edd-catalogs' ),
+                    'type' => 'text',
+                    'default' => '',
+                    'sanitize_callback' => 'callback_text'
                 )
             )
         );
