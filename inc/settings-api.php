@@ -48,7 +48,6 @@ class WeDevs_Settings_API_Test {
 	function menu_page(){
 	    $menu = add_menu_page( 'EDD Catalog', 'EDD Catalog', 'manage_options', 'edd-catalog', array($this,'draw_menu_page'), plugins_url( 'myplugin/images/icon.png' ),100 );
 		add_action( 'admin_print_styles-' . $menu, array($this,'admin_custom_css' ));
-		add_action( 'admin_print_scripts-' . $menu, array($this,'admin_custom_js' ));
 	}
 
 	function draw_menu_page(){
@@ -57,16 +56,15 @@ class WeDevs_Settings_API_Test {
 		$key 	= $this->get_opt( 'public_key', 'ba_edd_catalog_settings', '' );
 		$token 	= $this->get_opt( 'public_token', 'ba_edd_catalog_settings', '' );
 
-
 		?><div class="ba-edd-catalog-head row">
 
-			<div class="col-md-4 ba-edd-catalog-welcome">
+			<div class="col-md-3 ba-edd-catalog-welcome">
 				<img class="ba-edd-catalog-logo" src="http://placekitten.com/150/150">
-				<h4 class="ba-edd-catalog-title">Product Catalog</h4>
+				<h2 class="ba-edd-catalog-title">Product Catalog</h2>
 			</div>
 
-			<div class="col-md-8 ba-edd-catalog-news-feed">
-
+			<div class="col-md-9 ba-edd-catalog-news-feed">
+				<?php echo ba_edd_catalog_news_feed();?>
 			</div>
 
 		</div>
@@ -107,10 +105,6 @@ class WeDevs_Settings_API_Test {
 	function admin_custom_css() {
        wp_enqueue_style( 'edd-catalog-style' );
 
-   	}
-
-   	function admin_custom_js(){
-   		 wp_enqueue_script('edd-catalog-bootstrap');
    	}
 
     function get_settings_sections() {
