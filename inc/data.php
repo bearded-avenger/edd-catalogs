@@ -5,7 +5,7 @@ if(!function_exists('ba_edd_catalog_data')){
 
         $apiurl = sprintf('%s/edd-api/products/?number=-1',$site);
 
-        $transientKey = 'baEddCatalogs-Beta99Luftballons';
+        $transientKey = 'baEddCatalogs-Beta1';
 
         $cached = get_transient($transientKey);
 
