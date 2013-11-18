@@ -5,7 +5,7 @@ if(!function_exists('ba_edd_catalog_data')){
 
 	    $apiurl = sprintf('%s/edd-api/products/?key=%s&token=%s&number=-1',$site,$key,$token);
 
-	    $transientKey = 'baEddCatalogAlpha-5992';
+	    $transientKey = 'baEddCatalogsAlpha';
 
 	    $cached = get_transient($transientKey);
 
@@ -49,7 +49,7 @@ if(!function_exists('ba_edd_catalog_data')){
 					    $slug 		= isset($data['products'][$i]['info']['slug']) ? $data['products'][$i]['info']['slug'] : false;
 
 					    $title 		= sprintf('<h3 class="edd-catalog-item-title">%s</h3>',$getname);
-					    $image 		= sprintf('<a class="edd-catalog-img-link" href="%s"><img src="%s"></a>',$getlink,$getimg);
+					    $image 		= sprintf('<a class="edd-catalog-img-link" href="%s" target="_blank"><img src="%s"></a>',$getlink,$getimg);
 
 				   	 	$plugin 	= sprintf('%s/%s.php',$slug,$slug);
 					    $link 		= is_plugin_active($plugin) ? sprintf('<a class="edd-catalog-notify installed">installed</a>') : sprintf('<a class="edd-catalog-notify" href="%s">Buy Now %s</a>',$getlink,$getprice);
@@ -69,7 +69,7 @@ if(!function_exists('ba_edd_catalog_data')){
 
 		$output .= sprintf('</div>');
 
-	    set_transient($transientKey, $output, 600);
+	    set_transient($transientKey, $output, 12 * HOUR_IN_SECONDS);
 
 	    return apply_filters('ba_edd_catalog_output',$output);
 	}

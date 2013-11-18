@@ -1,10 +1,6 @@
 @import 'variables.less';
 @import 'mixins.less';
 @import 'grid.less';
-@import "labels.less";
-@import "badges.less";
-
-@import "popovers.less";
 
 .ba-edd-catalog-wrap {
     padding-right:20px;
@@ -108,6 +104,19 @@
         img {
             width: 100%;
         }
+
+        &:hover {
+            img {
+                .opacity(0.9);
+                .transition(opacity .15s linear);
+            }
+        }
+
+        &:active {
+            img {
+                .opacity(100);
+            }
+        }
     }
     .edd-catalog-notify {
         background: #07a1cd;
@@ -134,3 +143,27 @@
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
