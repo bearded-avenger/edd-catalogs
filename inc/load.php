@@ -15,8 +15,8 @@ require_once dirname( __FILE__ ) . '/class.settings-api.php';
  *
  * @author Tareq Hasan
  */
-if ( !class_exists('WeDevs_Settings_API_Test' ) ):
-class WeDevs_Settings_API_Test {
+if ( !class_exists('baEddGalleriesLoader' ) ):
+class baEddGalleriesLoader {
 
     private $settings_api;
 
@@ -45,68 +45,66 @@ class WeDevs_Settings_API_Test {
         $this->settings_api->admin_init();
     }
 
-        function menu_page(){
-            $menu = add_menu_page( 'EDD Catalog', 'EDD Catalog', 'manage_options', 'edd-catalog', array($this,'draw_menu_page'), plugins_url( 'myplugin/images/icon.png' ),100 );
-                add_action( 'admin_print_styles-' . $menu, array($this,'admin_custom_css' ));
-        }
+    function menu_page(){
+        $menu = add_menu_page( 'EDD Catalog', 'EDD Catalog', 'manage_options', 'edd-catalog', array($this,'draw_menu_page'), plugins_url( 'myplugin/images/icon.png' ),100 );
+        add_action( 'admin_print_styles-' . $menu, array($this,'admin_custom_css' ));
+    }
 
-        function draw_menu_page(){
+    function draw_menu_page(){
 
-                $site         = $this->get_opt( 'site', 'ba_edd_catalog_settings', '' );
-                $key         = $this->get_opt( 'public_key', 'ba_edd_catalog_settings', '' );
-                $token         = $this->get_opt( 'public_token', 'ba_edd_catalog_settings', '' );
+            $site         = $this->get_opt( 'site', 'ba_edd_catalog_settings', 'http://easydigitaldownloads.com' );
 
-                ?><div class="ba-edd-catalog-head row">
+            ?><div class="ba-edd-catalog-head row">
 
-                        <div class="col-md-4 ba-edd-catalog-welcome">
-                                <img class="ba-edd-catalog-logo" src="<?php echo plugins_url('../img/logo.png', __FILE__) ?>">
-                                <h2 class="ba-edd-catalog-title">Product Catalog</h2>
-                        </div>
+                    <div class="col-md-4 ba-edd-catalog-welcome">
+                            <img class="ba-edd-catalog-logo" src="<?php echo plugins_url('../img/logo.png', __FILE__) ?>">
+                            <h2 class="ba-edd-catalog-title">Product Catalog</h2>
+                    </div>
 
-                        <div class="col-md-8 ba-edd-catalog-news-feed">
-                                <h2 class="ba-edd-news-title">Latest news</h2>
-                                <a class="ba-edd-news-all" href="http://nickhaskins.co/news" target="_blank">More News &rsaquo;</a>
-                                <?php echo ba_edd_catalog_news_feed();?>
-                        </div>
-
-                </div>
-
-                <div class="ba-edd-catalog-wrap">
-
-                    <?php if(function_exists('ba_edd_catalog_data')) {
-                            echo ba_edd_catalog_data($site);
-                    } ?>
+                    <div class="col-md-8 ba-edd-catalog-news-feed">
+                            <h2 class="ba-edd-news-title">Latest news</h2>
+                            <a class="ba-edd-news-all" href="http://nickhaskins.co/news" target="_blank">More News &rsaquo;</a>
+                            <?php echo ba_edd_catalog_news_feed();?>
+                    </div>
 
             </div>
 
-            <?php
+            <div class="ba-edd-catalog-wrap">
+
+            <?php if(function_exists('ba_edd_catalog_data')) {
+                    echo ba_edd_catalog_data($site);
+            } ?>
+
+        </div>
+
+        <?php
 
 
-        }
+    }
 
-        function plugin_admin_init() {
-            wp_register_style( 'edd-catalog-style', $this->url.'/../css/style.css', self::version, true );
-        }
+    function plugin_admin_init() {
+        wp_register_style( 'edd-catalog-style', $this->url.'/../css/style.css', self::version, true );
+    }
 
-        function submenu_page() {
-                add_submenu_page( 'edd-catalog', 'Settings', 'Settings', 'manage_options', 'edd-catalog-settings', array($this,'submenu_page_callback') );
-        }
+    function submenu_page() {
+       	add_submenu_page( 'edd-catalog', 'Settings', 'Settings', 'manage_options', 'edd-catalog-settings', array($this,'submenu_page_callback') );
+    }
 
-        function submenu_page_callback() {
+    function submenu_page_callback() {
 
-                echo '<div class="wrap"><div id="icon-tools" class="icon32"></div>';
-                        echo '<h2>EDD Catalog Settings</h2>';
+        echo '<div class="wrap"><div id="icon-tools" class="icon32"></div>';
+                echo '<h2>EDD Catalog Settings</h2>';
 
-                $this->settings_api->show_forms();
+        $this->settings_api->show_forms();
 
-                echo '</div>';
+        echo '</div>';
 
-        }
+    }
 
-        function admin_custom_css() {
+   	function admin_custom_css() {
        wp_enqueue_style( 'edd-catalog-style' );
 
-           }
+    }
 
     function get_settings_sections() {
         $sections = array(
@@ -142,17 +140,17 @@ class WeDevs_Settings_API_Test {
 
         return $settings_fields;
     }
-        function get_opt( $option, $section, $default = '' ) {
+    function get_opt( $option, $section, $default = '' ) {
 
-            $options = get_option( $section );
+        $options = get_option( $section );
 
-            if ( isset( $options[$option] ) ) {
-                return $options[$option];
-            }
-
-            return $default;
+        if ( isset( $options[$option] ) ) {
+            return $options[$option];
         }
+
+        return $default;
+    }
 }
 endif;
 
-$settings = new WeDevs_Settings_API_Test();
+$settings = new baEddGalleriesLoader();

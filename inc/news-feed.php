@@ -5,10 +5,12 @@ if(!function_exists('ba_edd_catalog_news_feed')){
 	function ba_edd_catalog_news_feed( ){
 
 		$opts 	= get_option('ba_edd_catalog_settings');
-		$site   = isset($opts['site']) ? $opts['site'] : false;
+		$site   = isset($opts['site']) ? $opts['site'] : 'http://easydigitaldownloads.com/blog/feed';
+
+		//var_dump($site);
 		
 		// Get a SimplePie feed object from the specified feed source.
-		$rss = fetch_feed( 'http://nickhaskins.co/'.$site.'' );
+		$rss = fetch_feed( $site );
 
 		if ( ! is_wp_error( $rss ) ) : // Checks that the object is created correctly
 
