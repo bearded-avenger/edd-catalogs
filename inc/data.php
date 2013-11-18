@@ -1,11 +1,11 @@
 <?php
 
 if(!function_exists('ba_edd_catalog_data')){
-	function ba_edd_catalog_data($site = '', $key = '', $token ='') {
+	function ba_edd_catalog_data($site = '') {
 
-	    $apiurl = sprintf('%s/edd-api/products/?key=%s&token=%s&number=-1',$site,$key,$token);
+	    $apiurl = sprintf('%s/edd-api/products/?number=-1',$site);
 
-	    $transientKey = 'baEddCatalogs';
+	    $transientKey = 'baEddCatalogs-099';
 
 	    $cached = get_transient($transientKey);
 

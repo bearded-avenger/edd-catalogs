@@ -74,7 +74,7 @@ class WeDevs_Settings_API_Test {
 		<div class="ba-edd-catalog-wrap">
 
 	    	<?php if(function_exists('ba_edd_catalog_data')) {
-	    		echo ba_edd_catalog_data($site, $key, $token);
+	    		echo ba_edd_catalog_data($site);
 	    	} ?>
 
     	</div>
@@ -128,20 +128,6 @@ class WeDevs_Settings_API_Test {
                     'type' => 'text',
                     'default' => '',
                     'sanitize_callback' => 'callback_text'
-                ),
-                array(
-                    'name' => 'public_key',
-                    'label' => __( 'Public Key', 'edd-catalogs' ),
-                    'desc' => __( 'Enter your public key. NOT private key. You can find this in your user profile within the shop Wordpress admin.', 'edd-catalogs' ),
-                    'type' => 'password',
-                    'default' => ''
-                ),
-                array(
-                    'name' => 'public_token',
-                    'label' => __( 'Password', 'edd-catalogs' ),
-                    'desc' => __( 'Found in your user profile within the shop Wordpress admin.', 'edd-catalogs' ),
-                    'type' => 'password',
-                    'default' => ''
                 ),
                 array(
                     'name' => 'exclude',
