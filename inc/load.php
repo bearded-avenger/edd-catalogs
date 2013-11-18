@@ -133,14 +133,6 @@ class baEddGalleriesLoader {
                     'type' => 'text',
                     'default' => '',
                     'sanitize_callback' => 'callback_text'
-                ),
-                array(
-                    'name' => 'exclude',
-                    'label' => __( 'Excluded Products', 'edd-catalogs' ),
-                    'desc' => __( 'Enter the product slug.', 'edd-catalogs' ),
-                    'type' => 'text',
-                    'default' => '',
-                    'sanitize_callback' => 'callback_text'
                 )
             )
         );
