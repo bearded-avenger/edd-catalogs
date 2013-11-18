@@ -5,7 +5,7 @@ if(!function_exists('ba_edd_catalog_data')){
 
 	    $apiurl = sprintf('%s/edd-api/products/?number=-1',$site);
 
-	    $transientKey = 'baEddCatalogs-099';
+	    $transientKey = 'baEddCatalogs-0999';
 
 	    $cached = get_transient($transientKey);
 
@@ -22,8 +22,7 @@ if(!function_exists('ba_edd_catalog_data')){
 	    $data = json_decode( $remote['body'],true);
 	    $total = isset($data['products']) ? count($data['products']) : false;
 
-	    $opts 		= get_option('ba_edd_catalog_settings');
-		$getexcluded = isset($opts['exclude']) ? $opts['exclude'] : false;
+		$getexcluded = 'billable-hours';
 
 	    // action
 	    do_action('edd_catalog_before');
