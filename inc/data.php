@@ -5,7 +5,7 @@ if(!function_exists('ba_edd_catalog_data')){
 
 	    $apiurl = sprintf('%s/edd-api/products/?key=%s&token=%s&number=-1',$site,$key,$token);
 
-	    $transientKey = 'baEddCatalogsAlpha';
+	    $transientKey = 'baEddCatalogs';
 
 	    $cached = get_transient($transientKey);
 
@@ -31,41 +31,49 @@ if(!function_exists('ba_edd_catalog_data')){
 	    // start output
 	    $output = sprintf('<div class="edd-catalog-wrapper">');
 
-	    $output .= sprintf('<div class="row">');
+		    $output .= sprintf('<div class="row">');
 
-			//action
-		    do_action('edd_catalog_inside_top');
+				//action
+			    do_action('edd_catalog_inside_top'); // action
 
-			    for($i=0; $i<$total; $i++) {
+				    for($i=0; $i<$total; $i++) {
 
-			    	$exclude 	= $getexcluded == $data['products'][$i]['info']['slug'];
+				    	$exclude 	= $getexcluded == $data['products'][$i]['info']['slug'];
 
-				   	if ( !in_array($exclude, $data) ):
+					   	if ( !in_array($exclude, $data) ):
 
-					    $getname 	= isset($data['products'][$i]['info']['title']) ? $data['products'][$i]['info']['title'] : false;
-					    $getprice 	= isset($data['products'][$i]['pricing']['amount']) ? $data['products'][$i]['pricing']['amount'] : false;
-					    $getimg 	= isset($data['products'][$i]['info']['thumbnail']) ? $data['products'][$i]['info']['thumbnail'] : false;
-					    $getlink 	= isset($data['products'][$i]['info']['link']) ? $data['products'][$i]['info']['link'] : false;
-					    $slug 		= isset($data['products'][$i]['info']['slug']) ? $data['products'][$i]['info']['slug'] : false;
+					   		// get some vars ready
+						    $getname 		= isset($data['products'][$i]['info']['title']) ? $data['products'][$i]['info']['title'] : false;
+						    $getprice 		= isset($data['products'][$i]['pricing']['amount']) ? $data['products'][$i]['pricing']['amount'] : false;
+						    $getimg 		= isset($data['products'][$i]['info']['thumbnail']) ? $data['products'][$i]['info']['thumbnail'] : false;
+						    $getlink 		= isset($data['products'][$i]['info']['link']) ? $data['products'][$i]['info']['link'] : false;
+						    $slug 			= isset($data['products'][$i]['info']['slug']) ? $data['products'][$i]['info']['slug'] : false;
 
-					    $title 		= sprintf('<h3 class="edd-catalog-item-title">%s</h3>',$getname);
-					    $image 		= sprintf('<a class="edd-catalog-img-link" href="%s" target="_blank"><img src="%s"></a>',$getlink,$getimg);
+						    // get plugin path check if installed
+							$plugin 		= sprintf('%s/%s.php',$slug,$slug);
+						    $isinstalled 	= is_plugin_active($plugin);
 
-				   	 	$plugin 	= sprintf('%s/%s.php',$slug,$slug);
-					    $link 		= is_plugin_active($plugin) ? sprintf('<a class="edd-catalog-notify installed">installed</a>') : sprintf('<a class="edd-catalog-notify" href="%s">Buy Now %s</a>',$getlink,$getprice);
-					    $output 	.= sprintf('<div class="col-md-2"><div class="edd-catalog-item">%s<div class="edd-catalog-item-inner">%s%s</div></div></div>',$title,$image,$link);
+						    $image 			= true == $isinstalled ? sprintf('<a class="edd-catalog-img-link" target="_blank"><img src="%s"></a>',$getimg) : sprintf('<a class="edd-catalog-img-link" href="%s" target="_blank"><img src="%s"></a>',$getlink,$getimg);
+						    $link 			= true == $isinstalled ? sprintf('<a class="edd-catalog-notify installed">installed</a>') : sprintf('<a class="edd-catalog-notify" href="%s">Buy Now %s</a>',$getlink,$getprice);
+						    $installclass   = true == $isinstalled ? 'is-installed' : false;
 
-					    if ( ( 0 == $i % 6 ) && ( $i < $total )) {
+						    // title
+						    $title 			= sprintf('<h3 class="edd-catalog-item-title">%s</h3>',$getname);
 
-							$output .= sprintf('</div><div class="row">');
-						}
+						    // output
+						    $output 		.= sprintf('<div class="col-md-2"><div class="edd-catalog-item %s">%s<div class="edd-catalog-item-inner">%s%s</div></div></div>',$installclass,$title,$image,$link);
 
-				    endif;
-				}
+						    if ( ( 0 == $i % 6 ) && ( $i < $total )) {
 
-			do_action('edd_catalog_inside_bottom');
+								$output .= sprintf('</div><div class="row">');
+							}
 
-		$output .= sprintf('</div>');
+					    endif;
+					}
+
+				do_action('edd_catalog_inside_bottom'); // action
+
+			$output .= sprintf('</div>');
 
 		$output .= sprintf('</div>');
 

@@ -81,6 +81,10 @@
     border:1px solid darken(@edd-cat-base,5);
     border-radius:2px;
 
+    &.is-installed {
+        .opacity(.5);
+    }
+
     .edd-catalog-item-title {
         margin:0;
         padding:7px 10px;
@@ -103,18 +107,22 @@
         display: block;
         img {
             width: 100%;
+            border:1px solid transparent;
+            .box-sizing(border-box);
         }
 
         &:hover {
             img {
-                .opacity(0.9);
-                .transition(opacity .15s linear);
+                border-color: #21759b;
+                .transition(all .2s linear);
+
             }
         }
 
         &:active {
             img {
-                .opacity(100);
+                border-color:darken(#21759b,10);
+      
             }
         }
     }
