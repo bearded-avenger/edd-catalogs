@@ -46,7 +46,7 @@ class baEddGalleriesLoader {
     }
 
     function menu_page(){
-        $menu = add_menu_page( 'EDD Catalog', 'EDD Catalog', 'manage_options', 'edd-catalog', array($this,'draw_menu_page'), plugins_url( 'myplugin/images/icon.png' ),100 );
+        $menu = add_menu_page( 'EDD Catalog', 'EDD Catalog', 'manage_options', 'edd-catalog', array($this,'draw_menu_page'), plugins_url( '/icon.png', __FILE__ ),100 );
         add_action( 'admin_print_styles-' . $menu, array($this,'admin_custom_css' ));
     }
 
@@ -56,16 +56,15 @@ class baEddGalleriesLoader {
 
             ?><div class="ba-edd-catalog-head row">
 
-                    <div class="col-md-4 ba-edd-catalog-welcome">
-                            <img class="ba-edd-catalog-logo" src="<?php echo plugins_url('../img/logo.png', __FILE__) ?>">
-                            <h2 class="ba-edd-catalog-title">Product Catalog</h2>
-                    </div>
+                <div class="col-md-4 ba-edd-catalog-welcome">
+                   <h2 class="ba-edd-catalog-title">Product Catalog</h2>
+                </div>
 
-                    <div class="col-md-8 ba-edd-catalog-news-feed">
-                            <h2 class="ba-edd-news-title">Latest news</h2>
-                            <a class="ba-edd-news-all" href="http://nickhaskins.co/news" target="_blank">More News &rsaquo;</a>
-                            <?php echo ba_edd_catalog_news_feed();?>
-                    </div>
+                <div class="col-md-8 ba-edd-catalog-news-feed">
+                    <h2 class="ba-edd-news-title">Latest news</h2>
+                    <a class="ba-edd-news-all" href="http://nickhaskins.co/news" target="_blank">More News &rsaquo;</a>
+                    <?php echo ba_edd_catalog_news_feed();?>
+                </div>
 
             </div>
 
@@ -119,10 +118,18 @@ class baEddGalleriesLoader {
     function get_settings_fields() {
         $settings_fields = array(
             'ba_edd_catalog_settings' => array(
-                    array(
+                array(
                     'name' => 'site',
                     'label' => __( 'Shop Website', 'edd-catalogs' ),
                     'desc' => __( 'This should be the URL where the shop is installed.', 'edd-catalogs' ),
+                    'type' => 'text',
+                    'default' => '',
+                    'sanitize_callback' => 'callback_text'
+                ),
+                array(
+                    'name' => 'feed',
+                    'label' => __( 'Shop News Feed', 'edd-catalogs' ),
+                    'desc' => __( 'This should be the news feed URL for the shop.', 'edd-catalogs' ),
                     'type' => 'text',
                     'default' => '',
                     'sanitize_callback' => 'callback_text'

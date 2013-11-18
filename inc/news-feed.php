@@ -5,12 +5,11 @@ if(!function_exists('ba_edd_catalog_news_feed')){
 	function ba_edd_catalog_news_feed( ){
 
 		$opts 	= get_option('ba_edd_catalog_settings');
-		$site   = isset($opts['site']) ? $opts['site'] : 'http://easydigitaldownloads.com/blog/feed';
+		$feed   = isset($opts['feed']) ? $opts['feed'] : 'http://easydigitaldownloads.com/blog/feed';
 
-		//var_dump($site);
-		
+
 		// Get a SimplePie feed object from the specified feed source.
-		$rss = fetch_feed( $site );
+		$rss = fetch_feed( $feed );
 
 		if ( ! is_wp_error( $rss ) ) : // Checks that the object is created correctly
 
@@ -20,12 +19,16 @@ if(!function_exists('ba_edd_catalog_news_feed')){
 		    // Build an array of all the items, starting with element 0 (first element).
 		    $rss_items = $rss->get_items( 0, $maxitems );
 
+		else :
+
+		   $maxitems = false;
+
 		endif;
 		?>
 
 		<ul class="ba-edd-catalog-news-list">
 		    <?php if ( $maxitems == 0 ) : ?>
-		        <li><?php _e( 'No items', 'edd-catalogs' ); ?></li>
+		        <li><?php _e( 'No feed supplied.', 'edd-catalogs' ); ?></li>
 		    <?php else : ?>
 		        <?php // Loop through each feed item and display each item as a hyperlink. ?>
 		        <?php foreach ( $rss_items as $item ) : ?>
